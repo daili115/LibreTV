@@ -1571,15 +1571,20 @@ async function showSwitchResourceModal() {
         // 修复 isCurrentSource 判断，确保类型一致
         const isCurrentSource = String(sourceKey) === String(currentSourceCode) && String(result.vod_id) === String(currentVideoId);
         const sourceName = resourceOptions.find(opt => opt.key === sourceKey)?.name || '未知资源';
+        const coverUrl = result.vod_pic || '';
+        const hasCover = coverUrl && (coverUrl.startsWith('http://') || coverUrl.startsWith('https://'));
+        const localPlaceholder = 'image/nomedia.png';
+        const proxiedCoverUrl = hasCover ? PROXY_URL + encodeURIComponent(coverUrl) : '';
         
         html += `
             <div class="relative group ${isCurrentSource ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-105 transition-transform'}" 
                  ${!isCurrentSource ? `onclick="switchToResource('${sourceKey}', '${result.vod_id}')"` : ''}>
                 <div class="aspect-[2/3] rounded-lg overflow-hidden bg-gray-800">
-                    <img src="${result.vod_pic}" 
+                    <img src="${hasCover ? coverUrl : localPlaceholder}" 
                          alt="${result.vod_name}"
                          class="w-full h-full object-cover"
-                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiPjwvcmVjdD48cGF0aCBkPSJNMjEgMTV2NGEyIDIgMCAwIDEtMiAySDVhMiAyIDAgMCAxLTItMnYtNCI+PC9wYXRoPjxwb2x5bGluZSBwb2ludHM9IjE3IDggMTIgMyA3IDgiPjwvcG9seWxpbmU+PHBhdGggZD0iTTEyIDN2MTIiPjwvcGF0aD48L3N2Zz4='">
+                         onerror="this.onerror=null; this.src='${proxiedCoverUrl}'; this.onerror=function(){this.src='${localPlaceholder}'};"
+                         loading="lazy" referrerpolicy="no-referrer">
                 </div>
                 <div class="mt-1">
                     <div class="text-xs font-medium text-gray-200 truncate">${result.vod_name}</div>

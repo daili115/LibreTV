@@ -745,8 +745,10 @@ async function search() {
             const apiUrlAttr = item.api_url ?
                 `data-api-url="${item.api_url.replace(/"/g, '&quot;')}"` : '';
 
-            // 修改为水平卡片布局，图片在左侧，文本在右侧，并优化样式
-            const hasCover = item.vod_pic && item.vod_pic.startsWith('http');
+            const coverUrl = item.vod_pic || '';
+            const hasCover = coverUrl && (coverUrl.startsWith('http://') || coverUrl.startsWith('https://'));
+            const localPlaceholder = 'image/nomedia.png';
+            const proxiedCoverUrl = hasCover ? PROXY_URL + encodeURIComponent(coverUrl) : '';
 
             return `
                 <div class="card-hover bg-[#111] rounded-lg overflow-hidden cursor-pointer transition-all hover:scale-[1.02] h-full shadow-sm hover:shadow-md" 
@@ -754,10 +756,10 @@ async function search() {
                     <div class="flex h-full">
                         ${hasCover ? `
                         <div class="relative flex-shrink-0 search-card-img-container">
-                            <img src="${item.vod_pic}" alt="${safeName}" 
+                            <img src="${coverUrl}" alt="${safeName}" 
                                  class="h-full w-full object-cover transition-transform hover:scale-110" 
-                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=无封面'; this.classList.add('object-contain');" 
-                                 loading="lazy">
+                                 onerror="this.onerror=null; this.src='${proxiedCoverUrl}'; this.onerror=function(){this.src='${localPlaceholder}'};"
+                                 loading="lazy" referrerpolicy="no-referrer">
                             <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
                         </div>` : ''}
                         
