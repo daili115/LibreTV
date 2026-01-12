@@ -1,4 +1,4 @@
-# 🚀 Vercel 部署完成指南
+# 🚀 部署完成指南
 
 ## ✅ 已完成的步骤
 
@@ -11,7 +11,86 @@
    - Commit: "Fix Vercel deployment: Use CDN for Tailwind CSS and optimize middleware"
    - 已成功推送到远程仓库
 
-## 📋 通过 Vercel Dashboard 部署（推荐）
+## 📋 部署平台选择
+
+本项目支持多种部署平台，请根据你的需求选择：
+
+### 🌐 Cloudflare Pages（推荐）
+
+#### 方法 1: 通过 Cloudflare Dashboard 部署
+
+1. **访问 Cloudflare Dashboard**
+   - 登录：https://dash.cloudflare.com/
+
+2. **创建 Pages 项目**
+   - 点击 "Workers & Pages"
+   - 点击 "Create application"
+   - 选择 "Pages" 标签
+   - 点击 "Connect to Git"
+
+3. **连接 Git 仓库**
+   - 选择 GitHub
+   - 找到 LibreTV 仓库
+   - 点击 "Begin setup"
+
+4. **配置构建设置**
+   - **Project name**: libre-tv（或自定义名称）
+   - **Production branch**: main
+   - **Framework preset**: None
+   - **Build command**: 留空（这是静态项目）
+   - **Build output directory**: ./（保持默认）
+
+5. **环境变量（可选但推荐）**
+   - 点击 "Environment variables" 添加：
+     - `PASSWORD` - 用户密码（强烈建议设置）
+     - `ADMINPASSWORD` - 管理员密码（可选）
+     - `CACHE_TTL` - 缓存时间（秒，默认 86400）
+     - `MAX_RECURSION` - 最大递归层数（默认 5）
+     - `DEBUG` - 调试模式（true/false，默认 false）
+
+6. **点击 "Save and Deploy"**
+   - 等待部署完成（通常 1-3 分钟）
+
+#### 方法 2: 使用 Wrangler CLI 部署
+
+```bash
+# 安装 Wrangler（如果还没有）
+npm install -g wrangler
+
+# 登录 Cloudflare
+wrangler login
+
+# 部署到 Pages
+npx wrangler pages deploy . --project-name=libre-tv
+```
+
+#### Cloudflare Pages Functions 说明
+
+本项目使用 Cloudflare Pages Functions 来处理代理请求：
+- Functions 位于 `functions/` 目录
+- 代理函数：`functions/proxy/[[path]].js`
+- 中间件：`functions/_middleware.js`
+- Cloudflare Pages 会自动识别并部署这些 Functions
+- **不需要**运行 `wrangler deploy` 命令
+
+#### KV 命名空间绑定（可选，用于缓存）
+
+如果需要启用 KV 缓存功能：
+
+1. **创建 KV 命名空间**
+   - 在 Cloudflare Dashboard 中
+   - 进入 "Workers & Pages" > "KV"
+   - 点击 "Create a namespace"
+   - 命名为 `LIBRETV_PROXY_KV`
+
+2. **绑定到 Pages 项目**
+   - 进入你的 Pages 项目设置
+   - 点击 "Functions" > "KV namespace bindings"
+   - 添加绑定：
+     - Variable name: `LIBRETV_PROXY_KV`
+     - KV namespace: 选择刚创建的命名空间
+
+### 📋 通过 Vercel Dashboard 部署
 
 ### 方法 1: 自动重新部署（如果项目已连接）
 
@@ -88,6 +167,48 @@
 - 检查 Network 标签，所有资源应该成功加载（状态码 200）
 
 ## 🐛 故障排查
+
+### Cloudflare Pages 部署问题
+
+#### 如果部署失败：
+
+1. **检查构建命令**
+   - Build command 应该留空
+   - Build output directory 应该是 `./`
+
+2. **检查 Functions**
+   - 确保 `functions/` 目录存在
+   - 确保 `functions/proxy/[[path]].js` 存在
+   - 确保 `functions/_middleware.js` 存在
+
+3. **检查 wrangler.toml**
+   - 确保 `wrangler.toml` 文件存在
+   - 确保 `compatibility_date` 已设置
+
+4. **查看部署日志**
+   - 在 Cloudflare Dashboard 中
+   - 进入你的 Pages 项目
+   - 点击 "Deployments" 标签
+   - 点击失败的部署查看日志
+
+#### 如果 Functions 不工作：
+
+1. **检查 Functions 日志**
+   - 在 Cloudflare Dashboard 中
+   - 进入你的 Pages 项目
+   - 点击 "Functions" 标签
+   - 查看 real-time logs
+
+2. **检查环境变量**
+   - 确保环境变量已正确设置
+   - 变量名区分大小写
+
+3. **检查 KV 绑定**
+   - 如果使用了 KV 缓存
+   - 确保 KV 命名空间已正确绑定
+   - 变量名必须是 `LIBRETV_PROXY_KV`
+
+### Vercel 部署问题
 
 ### 如果样式仍然丢失：
 
