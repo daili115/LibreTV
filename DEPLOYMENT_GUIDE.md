@@ -33,12 +33,18 @@
    - 找到 LibreTV 仓库
    - 点击 "Begin setup"
 
-4. **配置构建设置**
+4. **配置构建设置（重要！）**
    - **Project name**: libre-tv（或自定义名称）
    - **Production branch**: main
    - **Framework preset**: None
-   - **Build command**: 留空（这是静态项目）
-   - **Build output directory**: ./（保持默认）
+   - **Build command**: **留空**（不要填写任何内容！）
+   - **Build output directory**: `./`（或留空）
+   
+   ⚠️ **重要提示**：
+   - ❌ 不要在 "Build command" 中填写 `npx wrangler deploy`
+   - ❌ 不要在 "Build command" 中填写任何命令
+   - ✅ "Build command" 必须留空
+   - ✅ Cloudflare Pages 会自动部署静态文件和 Functions
 
 5. **环境变量（可选但推荐）**
    - 点击 "Environment variables" 添加：
@@ -169,6 +175,26 @@ npx wrangler pages deploy . --project-name=libre-tv
 ## 🐛 故障排查
 
 ### Cloudflare Pages 部署问题
+
+#### ❌ 错误：Missing entry-point to Worker script or to assets directory
+
+如果你看到这个错误，说明你在 Cloudflare Dashboard 中错误地配置了 "Build command"。
+
+**解决方案**：
+1. 访问 Cloudflare Dashboard
+2. 进入你的 Pages 项目
+3. 点击 "Settings" > "Builds & deployments"
+4. 在 "Build configurations" 部分：
+   - **Build command**: 删除所有内容，必须留空
+   - **Build output directory**: 设置为 `./` 或留空
+5. 保存更改
+6. 点击 "Deployments" 标签
+7. 点击 "Retry deployment" 重新部署
+
+**原因**：
+- Cloudflare Pages 项目会自动部署静态文件和 Functions
+- 不需要运行 `npx wrangler deploy` 命令
+- `wrangler deploy` 是用于部署独立的 Cloudflare Workers 的
 
 #### 如果部署失败：
 
