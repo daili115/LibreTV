@@ -1,29 +1,38 @@
-/* 主页特定样式 */
+/* 主页特定样式 - iOS 风格 */
 
-/* 历史记录和设置按钮定位样式 */
+/* 历史记录和设置按钮定位样式 - iOS 风格 */
 .top-corner-button {
     position: fixed;
     z-index: 10;
-    background: #222;
-    border: 1px solid #333;
-    border-radius: 0.5rem;
-    padding: 0.375rem 0.75rem;
+    background: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
+    border: 1px solid var(--card-border);
+    border-radius: var(--ios-radius-medium);
+    padding: 0.5rem 0.75rem;
     transition: all 0.2s ease;
+    box-shadow: var(--ios-shadow-sm);
 }
 
 .top-corner-button:hover {
-    background: #333;
-    border-color: white;
+    background: var(--system-grouped-background);
+    border-color: var(--system-gray3);
+    transform: scale(1.05);
 }
 
-/* 搜索区域样式 */
+.top-corner-button:active {
+    transform: scale(0.95);
+}
+
+/* 搜索区域样式 - iOS 风格 */
 .search-box {
     height: 3.5rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 0.5rem;
+    box-shadow: var(--ios-shadow-md);
+    border-radius: var(--ios-radius-large);
     overflow: hidden;
     display: flex;
     align-items: stretch;
+    border: 1px solid var(--card-border);
 }
 
 .search-button {
@@ -31,22 +40,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
-    color: black;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    background: var(--system-blue);
+    color: white;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border-radius: 0;
 }
 
 .search-button:hover {
-    background: #f0f0f0;
+    background: var(--ios-blue);
+    transform: scale(1.02);
+}
+
+.search-button:active {
+    transform: scale(0.98);
 }
 
 .search-input {
     flex: 1;
-    background: #111;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
-    color: white;
+    background: var(--system-background);
+    border: none;
+    color: var(--text-primary);
     padding: 0 1.5rem;
     font-size: 1rem;
     outline: none;
@@ -54,28 +68,39 @@
 }
 
 .search-input:focus {
-    background: #191919;
+    background: var(--system-grouped-background);
 }
 
-/* 最近搜索记录样式 */
+.search-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* 最近搜索记录样式 - iOS 风格 */
 .recent-search-tag {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.375rem 0.875rem;
     margin: 0.25rem;
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    border-radius: 0.5rem;
-    color: #e5e7eb;
+    background: var(--system-background-secondary);
+    border: 1px solid var(--card-border);
+    border-radius: var(--ios-radius-medium);
+    color: var(--text-primary);
     font-size: 0.875rem;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    box-shadow: var(--ios-shadow-sm);
 }
 
 .recent-search-tag:hover {
-    background: rgba(59, 130, 246, 0.2);
-    border-color: rgba(59, 130, 246, 0.4);
+    background: var(--system-blue);
+    border-color: var(--system-blue);
+    color: white;
+    transform: scale(1.05);
 }
 
-/* 豆瓣区域样式 */
+.recent-search-tag:active {
+    transform: scale(0.95);
+}
+
+/* 豆瓣区域样式 - iOS 风格 */
 .douban-container {
     margin: 2rem auto;
     max-width: 1280px;
@@ -92,43 +117,54 @@
 .douban-toggle {
     display: flex;
     align-items: center;
-    background: #222;
+    background: var(--system-background);
+    border: 1px solid var(--card-border);
     border-radius: 9999px;
     padding: 0.25rem;
 }
 
 .douban-toggle-button {
-    padding: 0.25rem 0.75rem;
+    padding: 0.375rem 0.875rem;
     font-size: 0.875rem;
     border-radius: 9999px;
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 .douban-toggle-button.active {
-    background: #db2777;
+    background: var(--system-pink);
     color: white;
 }
 
 .douban-toggle-button:not(.active) {
-    color: #9ca3af;
+    color: var(--text-secondary);
 }
 
 .douban-toggle-button:not(.active):hover {
-    color: white;
+    color: var(--text-primary);
+    background: var(--system-grouped-background);
 }
 
 .douban-refresh-button {
     font-size: 0.875rem;
-    padding: 0.25rem 0.75rem;
-    background: #db2777;
+    padding: 0.375rem 0.875rem;
+    background: var(--system-pink);
     color: white;
-    border-radius: 0.5rem;
+    border-radius: var(--ios-radius-medium);
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 .douban-refresh-button:hover {
-    background: #be185d;
+    background: var(--ios-red);
+    transform: scale(1.05);
+}
+
+.douban-refresh-button:active {
+    transform: scale(0.95);
 }
 
 .douban-tags-container {
@@ -143,27 +179,29 @@
 }
 
 .douban-tag {
-    padding: 0.25rem 0.75rem;
-    background: rgba(219, 39, 119, 0.1);
-    border: 1px solid rgba(219, 39, 119, 0.2);
-    border-radius: 0.5rem;
-    color: #f9a8d4;
+    padding: 0.375rem 0.875rem;
+    background: var(--system-background-secondary);
+    border: 1px solid var(--card-border);
+    border-radius: var(--ios-radius-medium);
+    color: var(--text-primary);
     font-size: 0.875rem;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    font-weight: 500;
 }
 
 .douban-tag:hover {
-    background: rgba(219, 39, 119, 0.2);
-    border-color: rgba(219, 39, 119, 0.4);
+    background: var(--system-grouped-background);
+    border-color: var(--system-gray3);
+    transform: scale(1.05);
 }
 
 .douban-tag.active {
-    background: #db2777;
-    border-color: #db2777;
+    background: var(--system-pink);
+    border-color: var(--system-pink);
     color: white;
 }
 
-/* 搜索结果样式 */
+/* 搜索结果样式 - iOS 风格 */
 .search-results-container {
     width: 100%;
     max-width: 1280px;
@@ -174,11 +212,12 @@
 .search-result-stats {
     text-align: right;
     font-size: 0.875rem;
-    color: #9ca3af;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
+    font-weight: 500;
 }
 
-/* 响应式网格布局 */
+/* 响应式网格布局 - iOS 风格 */
 .search-results-grid {
     display: grid;
     gap: 1rem;

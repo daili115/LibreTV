@@ -1,8 +1,8 @@
-/* 添加重定向页面的基本样式 */
+/* 添加重定向页面的基本样式 - iOS 风格 */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0f1622;
-    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--system-grouped-background);
+    color: var(--text-primary);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -16,12 +16,12 @@ body {
     max-width: 90%;
     width: 380px;
     padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
+    border-radius: var(--ios-radius-xl);
+    box-shadow: var(--ios-shadow-lg);
+    border: 1px solid var(--card-border);
 }
 
 .logo-container {
@@ -34,26 +34,27 @@ body {
 .logo-icon {
     width: 40px;
     height: 40px;
-    color: #00ccff;
+    color: var(--ios-blue);
     margin-right: 10px;
 }
 
 .logo-text {
     font-size: 2rem;
     margin: 0;
-    background: linear-gradient(to right, #00ccff, #ff3c78);
+    background: linear-gradient(135deg, var(--ios-blue), var(--ios-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-weight: 700;
 }
 
 .loading-animation {
     display: inline-block;
     width: 50px;
     height: 50px;
-    border: 3px solid rgba(255, 255, 255, 0.2);
+    border: 3px solid var(--system-gray3);
     border-radius: 50%;
-    border-top-color: #00ccff;
+    border-top-color: var(--system-blue);
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
 }
@@ -65,42 +66,49 @@ body {
 .redirect-message {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 #redirect-status {
     font-size: 0.9rem;
-    color: #8599b2;
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
     height: 20px;
 }
 
 .redirect-hint {
     font-size: 0.9rem;
-    color: #8599b2;
+    color: var(--text-secondary);
     margin-top: 20px;
 }
 
 .redirect-hint a {
-    color: #00ccff;
+    color: var(--system-blue);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.2s ease;
     padding: 5px 10px;
-    border-radius: 4px;
-    background-color: rgba(0, 204, 255, 0.1);
+    border-radius: var(--ios-radius-small);
+    background-color: rgba(10, 132, 255, 0.1);
 }
 
 .redirect-hint a:hover {
-    background-color: rgba(0, 204, 255, 0.2);
+    background-color: rgba(10, 132, 255, 0.2);
     text-decoration: underline;
+    transform: scale(1.05);
 }
 
-/* 移动端优化 */
+.redirect-hint a:active {
+    transform: scale(0.95);
+}
+
+/* 移动端优化 - iOS 风格 */
 @media (max-width: 480px) {
     .redirect-container {
         padding: 1.5rem;
         width: 85%;
+        border-radius: var(--ios-radius-large);
     }
 
     .logo-icon {

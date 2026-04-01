@@ -1,25 +1,30 @@
-/* 模态框通用样式 */
+/* 模态框通用样式 - iOS 风格 */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: var(--ios-blur-dark);
+    -webkit-backdrop-filter: var(--ios-blur-dark);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 40;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .modal-content {
-    background-color: #111;
+    background-color: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
     padding: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid #333;
+    border-radius: var(--ios-radius-xl);
+    border: 1px solid var(--card-border);
     width: 91.666667%;
     max-width: 56rem;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--ios-shadow-lg);
 }
 
 .modal-header {
@@ -33,23 +38,37 @@
 .modal-title {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(to right, #00ccff, #ff3c78);
+    background: linear-gradient(135deg, var(--ios-blue), var(--ios-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     word-break: break-word;
     padding-right: 1rem;
     max-width: 80%;
 }
 
 .modal-close {
-    color: #9ca3af;
+    color: var(--text-secondary);
     font-size: 1.5rem;
-    transition: color 0.2s;
+    transition: all 0.2s ease;
     flex-shrink: 0;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ios-radius-small);
 }
 
 .modal-close:hover {
-    color: white;
+    color: var(--text-primary);
+    background: var(--system-grouped-background);
+    transform: scale(1.1);
+}
+
+.modal-close:active {
+    transform: scale(0.95);
 }
 
 .modal-body {
@@ -58,7 +77,7 @@
     min-height: 0;
 }
 
-/* 密码验证模态框 */
+/* 密码验证模态框 - iOS 风格 */
 .password-modal {
     z-index: 65;
 }
@@ -69,46 +88,62 @@
 
 .password-input {
     width: 100%;
-    background-color: #111;
-    border: 1px solid #333;
-    color: white;
+    background-color: var(--system-background);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--ios-radius-medium);
     margin-bottom: 1rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
 }
 
 .password-input:focus {
     outline: none;
-    border-color: white;
+    border-color: var(--system-blue);
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.1);
+}
+
+.password-input::placeholder {
+    color: var(--text-tertiary);
 }
 
 .password-submit {
     width: 100%;
-    background-color: #3b82f6;
+    background-color: var(--system-blue);
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: var(--ios-radius-medium);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .password-submit:hover {
-    background-color: #2563eb;
+    background-color: var(--ios-blue);
+    transform: scale(1.02);
+}
+
+.password-submit:active {
+    transform: scale(0.98);
 }
 
 .password-error {
-    color: #ef4444;
+    color: var(--system-red);
     margin-top: 0.5rem;
     display: none;
+    font-weight: 500;
 }
 
-/* 声明模态框 */
+/* 声明模态框 - iOS 风格 */
 .disclaimer-modal {
     z-index: 60;
 }
 
 .disclaimer-content {
-    color: #d1d5db;
-    line-height: 1.5;
+    color: var(--text-primary);
+    line-height: 1.6;
 }
 
 .disclaimer-content p {
@@ -116,38 +151,49 @@
 }
 
 .disclaimer-content strong {
-    color: #60a5fa;
+    color: var(--system-blue);
+    font-weight: 600;
 }
 
 .disclaimer-button {
     margin-top: 1.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(to right, #4f46e5, #8b5cf6, #ec4899);
+    background: linear-gradient(135deg, var(--ios-blue), var(--ios-purple));
     color: white;
     font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
+    border-radius: var(--ios-radius-medium);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--ios-shadow-md);
 }
 
 .disclaimer-button:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-    transform: translateY(-1px);
+    box-shadow: var(--ios-shadow-lg);
+    transform: translateY(-2px) scale(1.02);
 }
 
-/* Toast 和 Loading 提示 */
+.disclaimer-button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Toast 和 Loading 提示 - iOS 风格 */
 .toast {
     position: fixed;
     top: 1rem;
     left: 50%;
     transform: translateX(-50%) translateY(-100%);
-    background-color: #ef4444;
+    background-color: var(--system-gray6);
+    backdrop-filter: var(--ios-blur-dark);
+    -webkit-backdrop-filter: var(--ios-blur-dark);
     color: white;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
-    transition: all 0.3s;
+    border-radius: var(--ios-radius-medium);
+    box-shadow: var(--ios-shadow-lg);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
     opacity: 0;
     z-index: 50;
+    font-weight: 500;
 }
 
 .toast.show {
@@ -158,7 +204,9 @@
 .loading-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: var(--ios-blur-dark);
+    -webkit-backdrop-filter: var(--ios-blur-dark);
     display: none;
     align-items: center;
     justify-content: center;
@@ -166,20 +214,23 @@
 }
 
 .loading-content {
-    background-color: #111;
+    background-color: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
     padding: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid #333;
+    border-radius: var(--ios-radius-large);
+    border: 1px solid var(--card-border);
     display: flex;
     align-items: center;
     gap: 1rem;
+    box-shadow: var(--ios-shadow-lg);
 }
 
 .loading-spinner {
     width: 2rem;
     height: 2rem;
-    border: 4px solid white;
-    border-top-color: transparent;
+    border: 4px solid var(--system-gray3);
+    border-top-color: var(--system-blue);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -189,77 +240,93 @@
 }
 
 .loading-text {
-    color: white;
+    color: var(--text-primary);
     font-size: 1.125rem;
+    font-weight: 500;
 }
 
-/* 动画效果 */
+/* 动画效果 - iOS 风格 */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 }
 
 .modal-overlay.show {
-    animation: fadeIn 0.3s forwards;
+    animation: fadeIn 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     display: flex;
 }
 
 .modal-overlay.hide {
-    animation: fadeOut 0.3s forwards;
+    animation: fadeOut 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
-/* 资源速率测试相关样式 */
+/* 资源速率测试相关样式 - iOS 风格 */
 .speed-indicator {
     display: inline-flex;
     align-items: center;
     gap: 2px;
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1;
 }
 
 .speed-indicator.good {
-    color: #10b981;
+    color: var(--system-green);
 }
 
 .speed-indicator.medium {
-    color: #f59e0b;
+    color: var(--system-orange);
 }
 
 .speed-indicator.poor {
-    color: #ef4444;
+    color: var(--system-red);
 }
 
 .speed-indicator.error {
-    color: #ef4444;
+    color: var(--system-red);
 }
 
-/* 资源卡片悬停效果增强 */
+/* 资源卡片悬停效果增强 - iOS 风格 */
 .resource-card {
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border-radius: var(--ios-radius-medium);
 }
 
 .resource-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--ios-shadow-lg);
 }
 
 .resource-card.current {
-    border: 1px solid #3b82f6;
-    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+    border: 2px solid var(--system-blue);
+    box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2);
 }
 
-/* 速率徽章样式 */
+/* 速率徽章样式 - iOS 风格 */
 .speed-badge {
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     font-size: 9px;
     font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-    border-radius: 4px;
-    padding: 2px 4px;
+    border-radius: var(--ios-radius-small);
+    padding: 2px 6px;
+    background: var(--system-gray6);
+    color: white;
 }

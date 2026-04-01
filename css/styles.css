@@ -12,11 +12,11 @@ LibreTV 全局样式
     position: absolute;
     top: 12px;
     right: 12px;
-    background: #222;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 6px;
-    color: white;
+    background: var(--system-background);
+    border: 1px solid var(--card-border);
+    border-radius: var(--ios-radius-small);
+    padding: 8px;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,66 +26,110 @@ LibreTV 全局样式
 }
 
 .close-btn:hover {
-    background: #333;
-    border-color: #555;
+    background: var(--system-gray5);
+    border-color: var(--system-gray3);
+    transform: scale(1.1);
+}
+
+.close-btn:active {
+    transform: scale(0.95);
 }
 
 .close-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     stroke: currentColor;
 }
 
 :root {
-    /* 赛博影视主题配色方案 - 柔和版 */
-    --primary-color: #00ccff;       /* 霓虹蓝主色调 */
-    --primary-light: #33d6ff;       /* 浅霓虹蓝变体 */
-    --secondary-color: #0f1622;     /* 深蓝黑背景色 */
-    --accent-color: #ff3c78;        /* 霓虹粉强调色 */
-    --text-color: #e6f2ff;          /* 柔和的蓝白色文本 */
-    --text-muted: #8599b2;          /* 淡蓝灰色次级文本 */
-    --border-color: rgba(0, 204, 255, 0.15);
-    --page-gradient-start: #0f1622; /* 深蓝黑起始色 */
-    --page-gradient-end: #192231;   /* 深靛蓝结束色 */
-    --card-gradient-start: #121b29; /* 卡片起始色 */
-    --card-gradient-end: #1c2939;   /* 卡片结束色 */
-    --card-accent: rgba(0, 204, 255, 0.12); /* 霓虹蓝卡片强调色 */
-    --card-hover-border: rgba(0, 204, 255, 0.5); /* 悬停边框颜色 */
+    /* iOS SwiftUI 风格配色方案 */
+    --ios-blue: #007AFF;
+    --ios-blue-light: #5AC8FA;
+    --ios-green: #34C759;
+    --ios-orange: #FF9500;
+    --ios-red: #FF3B30;
+    --ios-purple: #AF52DE;
+    --ios-pink: #FF2D55;
+
+    /* iOS 系统颜色 */
+    --system-background: #F2F2F7;
+    --system-background-secondary: #FFFFFF;
+    --system-grouped-background: #F2F2F7;
+    --system-gray6: #1C1C1E;
+    --system-gray5: #2C2C2E;
+    --system-gray4: #3A3A3C;
+    --system-gray3: #48484A;
+    --system-gray2: #636366;
+    --system-gray: #8E8E93;
+    --system-blue: #0A84FF;
+    --system-green: #30D158;
+    --system-orange: #FF9F0A;
+    --system-red: #FF453A;
+    --system-yellow: #FFD60A;
+
+    /* 文本颜色 */
+    --text-primary: #000000;
+    --text-secondary: #3C3C4399;
+    --text-tertiary: #3C3C4366;
+    --text-white: #FFFFFF;
+
+    /* iOS 风格变量 */
+    --ios-radius-small: 8px;
+    --ios-radius-medium: 12px;
+    --ios-radius-large: 16px;
+    --ios-radius-xl: 20px;
+
+    /* iOS 阴影 */
+    --ios-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --ios-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --ios-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+    /* iOS 毛玻璃效果 */
+    --ios-blur-light: blur(20px) saturate(180%);
+    --ios-blur-dark: blur(20px) saturate(180%);
+
+    /* 页面背景 */
+    --page-gradient-start: #F2F2F7;
+    --page-gradient-end: #E5E5EA;
+
+    /* 卡片样式 */
+    --card-background: rgba(255, 255, 255, 0.8);
+    --card-background-dark: rgba(28, 28, 30, 0.8);
+    --card-border: rgba(0, 0, 0, 0.1);
+    --card-hover-border: rgba(0, 122, 255, 0.3);
 }
 
 .page-bg {
     background: linear-gradient(180deg, var(--page-gradient-start), var(--page-gradient-end));
     min-height: 100vh;
-    /* 柔和赛博点状背景 */
-    background-image: 
-        linear-gradient(180deg, var(--page-gradient-start), var(--page-gradient-end)),
-        radial-gradient(circle at 25px 25px, rgba(0, 204, 255, 0.04) 2px, transparent 3px),
-        radial-gradient(circle at 75px 75px, rgba(255, 60, 120, 0.02) 1px, transparent 2px),
-        radial-gradient(circle at 50px 50px, rgba(150, 255, 250, 0.015) 1px, transparent 2px);
-    background-blend-mode: normal;
-    background-size: cover, 100px 100px, 50px 50px, 75px 75px;
+    /* iOS 风格的简洁背景 */
+    background-image: none;
+    background-size: cover;
 }
 
 button, .card-hover {
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* 改进卡片适应不同内容长度 */
+/* 改进卡片适应不同内容长度 - iOS 风格 */
 .card-hover {
-    border: 1px solid var(--border-color);
-    background: linear-gradient(135deg, var(--card-gradient-start), var(--card-gradient-end));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--card-border);
+    background: var(--card-background);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
+    box-shadow: var(--ios-shadow-md);
     position: relative;
     overflow: hidden;
-    border-radius: 6px;
+    border-radius: var(--ios-radius-large);
     display: flex;
     flex-direction: column;
     height: 100%;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* 确保卡片内容区域高度一致性 */
 .card-hover .flex-grow {
-    min-height: unset; /* 移除最小高度限制，让内容自然流动 */
+    min-height: unset;
     display: flex;
     flex-direction: column;
 }
@@ -99,46 +143,57 @@ button, .card-hover {
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
-    line-height: 1.2rem;
-    word-break: break-word; /* 允许在任何字符间断行 */
-    hyphens: auto; /* 允许断词 */
+    line-height: 1.3;
+    word-break: break-word;
+    hyphens: auto;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.card-hover p {
+    color: var(--text-secondary);
 }
 
 .card-hover::before {
     content: "";
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, var(--card-accent), transparent);
-    transition: left 0.6s ease;
+    background: linear-gradient(135deg, rgba(0, 122, 255, 0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .card-hover:hover {
     border-color: var(--card-hover-border);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--ios-shadow-lg);
 }
 
 .card-hover:hover::before {
-    left: 100%;
+    opacity: 1;
 }
 
 .gradient-text {
-    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--ios-blue), var(--ios-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* 改进设置面板样式 */
+/* 改进设置面板样式 - iOS 风格 */
 .settings-panel {
     scrollbar-width: thin;
-    scrollbar-color: #444 #222;
+    scrollbar-color: var(--system-gray3) var(--system-gray6);
     transform: translateX(100%);
-    transition: transform 0.3s ease;
-    background: linear-gradient(135deg, var(--page-gradient-end), var(--page-gradient-start));
-    border-left: 1px solid var(--primary-color);
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
+    border-left: 1px solid var(--card-border);
+    box-shadow: var(--ios-shadow-lg);
 }
 
 .settings-panel.show {
@@ -146,7 +201,7 @@ button, .card-hover {
 }
 
 .settings-panel::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .settings-panel::-webkit-scrollbar-track {
@@ -154,17 +209,25 @@ button, .card-hover {
 }
 
 .settings-panel::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background-color: var(--system-gray3);
     border-radius: 4px;
 }
 
 .search-button {
-    background: var(--primary-color);
-    color: var(--text-color);
+    background: var(--ios-blue);
+    color: white;
+    border-radius: 0;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 .search-button:hover {
-    background: var(--primary-light);
+    background: var(--system-blue);
+    transform: scale(1.02);
+}
+
+.search-button:active {
+    transform: scale(0.98);
 }
 
 ::-webkit-scrollbar {
@@ -173,56 +236,68 @@ button, .card-hover {
 }
 
 ::-webkit-scrollbar-track {
-    background: #111;
+    background: var(--system-grouped-background);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #333;
+    background: var(--system-gray3);
     border-radius: 4px;
     transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #444;
+    background: var(--system-gray2);
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #333 #111;
+    scrollbar-color: var(--system-gray3) var(--system-grouped-background);
 }
 
 .search-tag {
-    background: linear-gradient(135deg, var(--card-gradient-start), var(--card-gradient-end));
-    color: var(--text-color);
+    background: var(--system-background-secondary);
+    color: var(--text-primary);
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--ios-radius-medium);
     font-size: 0.875rem;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--ios-shadow-sm);
+    transition: all 0.2s ease;
 }
 
 .search-tag:hover {
-    background: linear-gradient(135deg, var(--card-gradient-end), var(--card-gradient-start));
-    border-color: var(--primary-color);
+    background: var(--system-blue);
+    color: white;
+    border-color: var(--system-blue);
+    transform: scale(1.05);
 }
 
 .footer {
     width: 100%;
     transition: all 0.3s ease;
     margin-top: auto;
-    background: linear-gradient(to bottom, transparent, var(--page-gradient-start));
-    border-top: 1px solid var(--border-color);
+    background: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
+    border-top: 1px solid var(--card-border);
+    padding: 1.5rem 0;
 }
 
 .footer a:hover {
     text-decoration: underline;
+    color: var(--ios-blue);
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--system-grouped-background);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -251,56 +326,78 @@ body {
     }
 }
 
-/* 移动端布局优化 */
+/* 移动端布局优化 - iOS 风格 */
 @media screen and (max-width: 768px) {
     .card-hover h3 {
         min-height: 2.5rem;
     }
-    
+
     .card-hover .flex-grow {
         min-height: 80px;
     }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 }
 
 #modal.show {
-    animation: fadeIn 0.3s forwards;
+    animation: fadeIn 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 #modal.hide {
-    animation: fadeOut 0.3s forwards;
+    animation: fadeOut 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 #modal > div {
-    background: linear-gradient(135deg, var(--card-gradient-start), var(--card-gradient-end));
-    border: 1px solid var(--primary-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 204, 255, 0.1);
-    border-radius: 8px;
+    background: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--ios-shadow-lg);
+    border-radius: var(--ios-radius-xl);
 }
 
 #episodesGrid button {
-    background: rgba(0, 204, 255, 0.08);
-    border: 1px solid rgba(0, 204, 255, 0.2);
+    background: var(--system-background);
+    border: 1px solid var(--card-border);
+    border-radius: var(--ios-radius-small);
     transition: all 0.2s ease;
+    color: var(--text-primary);
 }
 
 #episodesGrid button:hover {
-    background: rgba(0, 204, 255, 0.15);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 8px rgba(0, 204, 255, 0.3);
+    background: var(--system-blue);
+    border-color: var(--system-blue);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: var(--ios-shadow-md);
+}
+
+#episodesGrid button:active {
+    transform: scale(0.95);
 }
 
 #yellowFilterToggle:checked + .toggle-bg {
-    background-color: var(--primary-color);
+    background-color: var(--system-green);
 }
 
 #yellowFilterToggle:checked ~ .toggle-dot {
@@ -309,12 +406,12 @@ body {
 
 #yellowFilterToggle:focus + .toggle-bg,
 #yellowFilterToggle:hover + .toggle-bg {
-    box-shadow: 0 0 0 2px rgba(0, 204, 255, 0.3);
+    box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.3);
 }
 
 /* 添加广告过滤开关的CSS */
 #adFilterToggle:checked + .toggle-bg {
-    background-color: var(--primary-color);
+    background-color: var(--system-green);
 }
 
 #adFilterToggle:checked ~ .toggle-dot {
@@ -323,86 +420,93 @@ body {
 
 #adFilterToggle:focus + .toggle-bg,
 #adFilterToggle:hover + .toggle-bg {
-    box-shadow: 0 0 0 2px rgba(0, 204, 255, 0.3);
+    box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.3);
 }
 
 .toggle-dot {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background: white;
 }
 
 .toggle-bg {
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: var(--system-gray3);
 }
 
 #yellowFilterToggle:checked ~ .toggle-dot {
-    box-shadow: 0 2px 4px rgba(0, 204, 255, 0.3);
+    box-shadow: 0 2px 4px rgba(52, 199, 89, 0.3);
 }
 
 #adFilterToggle:checked ~ .toggle-dot {
-    box-shadow: 0 2px 4px rgba(0, 204, 255, 0.3);
+    box-shadow: 0 2px 4px rgba(52, 199, 89, 0.3);
 }
 
-/* 添加API复选框样式 */
+/* 添加API复选框样式 - iOS 风格 */
 .form-checkbox {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    height: 14px;
-    width: 14px;
-    background-color: #222;
-    border: 1px solid #333;
-    border-radius: 3px;
+    height: 18px;
+    width: 18px;
+    background-color: var(--system-background);
+    border: 2px solid var(--system-gray3);
+    border-radius: 4px;
     cursor: pointer;
     position: relative;
     outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-checkbox:hover {
+    border-color: var(--system-gray2);
 }
 
 .form-checkbox:checked {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: var(--system-blue);
+    border-color: var(--system-blue);
 }
 
 .form-checkbox:checked::after {
     content: '';
     position: absolute;
-    left: 4px;
+    left: 5px;
     top: 1px;
-    width: 4px;
-    height: 8px;
+    width: 5px;
+    height: 10px;
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 
-/* API滚动区域美化 */
+/* API滚动区域美化 - iOS 风格 */
 #apiCheckboxes {
     scrollbar-width: thin;
-    scrollbar-color: #444 #222;
+    scrollbar-color: var(--system-gray3) var(--system-grouped-background);
 }
 
 #apiCheckboxes::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 #apiCheckboxes::-webkit-scrollbar-track {
-    background: #222;
+    background: var(--system-grouped-background);
     border-radius: 4px;
 }
 
 #apiCheckboxes::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background-color: var(--system-gray3);
     border-radius: 4px;
 }
 
-/* 自定义API列表样式 */
+/* 自定义API列表样式 - iOS 风格 */
 #customApisList {
     scrollbar-width: thin;
-    scrollbar-color: #444 #222;
+    scrollbar-color: var(--system-gray3) var(--system-grouped-background);
 }
 
 #customApisList::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 #customApisList::-webkit-scrollbar-track {
@@ -410,18 +514,18 @@ body {
 }
 
 #customApisList::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background-color: var(--system-gray3);
     border-radius: 4px;
 }
 
-/* 设置面板滚动样式 */
+/* 设置面板滚动样式 - iOS 风格 */
 .settings-panel {
     scrollbar-width: thin;
-    scrollbar-color: #444 #222;
+    scrollbar-color: var(--system-gray3) var(--system-grouped-background);
 }
 
 .settings-panel::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .settings-panel::-webkit-scrollbar-track {
@@ -429,7 +533,7 @@ body {
 }
 
 .settings-panel::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background-color: var(--system-gray3);
     border-radius: 4px;
 }
 
@@ -452,17 +556,17 @@ body {
     opacity: 1;
 }
 
-/* 成人内容API标记样式 */
+/* 成人内容API标记样式 - iOS 风格 */
 .api-adult + label {
-    color: #ff6b8b !important;
+    color: var(--system-red) !important;
 }
 
-/* 添加警告图标和标签样式 */
+/* 添加警告图标和标签样式 - iOS 风格 */
 .adult-warning {
     display: inline-flex;
     align-items: center;
     margin-left: 0.25rem;
-    color: #ff6b8b;
+    color: var(--system-red);
 }
 
 .adult-warning svg {
@@ -471,30 +575,31 @@ body {
     margin-right: 4px;
 }
 
-/* 过滤器禁用样式 */
+/* 过滤器禁用样式 - iOS 风格 */
 .filter-disabled {
     opacity: 0.5;
     pointer-events: none;
     cursor: not-allowed;
 }
 
-/* API组标题样式 */
+/* API组标题样式 - iOS 风格 */
 .api-group-title {
     grid-column: span 2;
     padding: 0.25rem 0;
     margin-top: 0.5rem;
-    border-top: 1px solid #333;
-    color: #8599b2;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-secondary);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    font-weight: 600;
 }
 
 .api-group-title.adult {
-    color: #ff6b8b;
+    color: var(--system-red);
 }
 
-/* 过滤器禁用样式 - 改进版本 */
+/* 过滤器禁用样式 - 改进版本 - iOS 风格 */
 .filter-disabled {
     position: relative;
 }
@@ -506,8 +611,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    border-radius: 0.5rem;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: var(--ios-radius-medium);
     z-index: 5;
 }
 
@@ -516,22 +621,22 @@ body {
 }
 
 .filter-disabled .toggle-bg {
-    background-color: #333 !important;
+    background-color: var(--system-gray3) !important;
 }
 
 .filter-disabled .toggle-dot {
     transform: translateX(0) !important;
-    background-color: #666 !important;
+    background-color: var(--system-gray) !important;
 }
 
-/* 改进过滤器禁用样式 */
+/* 改进过滤器禁用样式 - iOS 风格 */
 .filter-disabled .filter-description {
-    color: #ff6b8b !important;
+    color: var(--system-red) !important;
     font-style: italic;
     font-weight: 500;
 }
 
-/* 修改过滤器禁用样式，确保文字清晰可见 */
+/* 修改过滤器禁用样式，确保文字清晰可见 - iOS 风格 */
 .filter-disabled {
     position: relative;
 }
@@ -543,41 +648,41 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.3);
-    border-radius: 0.5rem;
+    background-color: rgba(0,0,0,0.05);
+    border-radius: var(--ios-radius-medium);
     z-index: 5;
 }
 
 .filter-disabled > * {
-    opacity: 1; /* 提高子元素不透明度，保证可见性 */
-    z-index: 6; /* 确保内容在遮罩上方 */
+    opacity: 1;
+    z-index: 6;
 }
 
-/* 改进过滤器禁用状态下的描述样式 */
+/* 改进过滤器禁用状态下的描述样式 - iOS 风格 */
 .filter-disabled .filter-description {
-    color: #ff7b9d !important; /* 更亮的粉色 */
+    color: var(--system-red) !important;
     font-style: italic;
     font-weight: 500;
-    text-shadow: 0 0 2px rgba(0,0,0,0.8); /* 添加文字阴影提高对比度 */
+    text-shadow: none;
 }
 
-/* 开关的禁用样式 */
+/* 开关的禁用样式 - iOS 风格 */
 .filter-disabled .toggle-bg {
-    background-color: #444 !important;
+    background-color: var(--system-gray3) !important;
     opacity: 0.8;
 }
 
 .filter-disabled .toggle-dot {
-    transform: translateX(0) ;
-    background-color: #777 ;
+    transform: translateX(0);
+    background-color: var(--system-gray);
     opacity: 0.9;
 }
 
-/* 警告提示样式改进 */
+/* 警告提示样式改进 - iOS 风格 */
 .filter-tooltip {
-    background-color: rgba(255, 61, 87, 0.1);
-    border: 1px solid rgba(255, 61, 87, 0.2);
-    border-radius: 0.25rem;
+    background-color: rgba(255, 69, 58, 0.1);
+    border: 1px solid rgba(255, 69, 58, 0.2);
+    border-radius: var(--ios-radius-small);
     padding: 0.5rem;
     margin-top: 0.5rem;
     display: flex;
@@ -595,51 +700,57 @@ body {
     margin-right: 0.35rem;
 }
 
-/* 编辑按钮样式 */
+/* 编辑按钮样式 - iOS 风格 */
 .custom-api-edit {
-    color: #3b82f6;
+    color: var(--system-blue);
     transition: color 0.2s ease;
 }
 
 .custom-api-edit:hover {
-    color: #2563eb;
+    color: var(--ios-blue);
 }
 
-/* 自定义API条目样式改进 */
+/* 自定义API条目样式改进 - iOS 风格 */
 #customApisList .api-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem;
     margin-bottom: 0.25rem;
-    background-color: #222;
-    border-radius: 0.25rem;
-    transition: background-color 0.2s ease;
+    background-color: var(--system-background);
+    border-radius: var(--ios-radius-small);
+    border: 1px solid var(--card-border);
+    transition: all 0.2s ease;
 }
 
 #customApisList .api-item:hover {
-    background-color: #2a2a2a;
+    background-color: var(--system-grouped-background);
+    border-color: var(--system-gray3);
 }
 
-/* 成人内容标签样式 */
+/* 成人内容标签样式 - iOS 风格 */
 .adult-tag {
     display: inline-flex;
     align-items: center;
-    color: #ff6b8b;
+    color: var(--system-red);
     font-size: 0.7rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-right: 0.35rem;
 }
 
-/* 历史记录面板样式 */
+/* 历史记录面板样式 - iOS 风格 */
 .history-panel {
-    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease-in-out;
-    overflow-y: scroll; /* 始终显示滚动条，防止宽度变化 */
-    overflow-x: hidden; /* 防止水平滚动 */
-    width: 320px; /* 固定宽度 */
-    box-sizing: border-box; /* 确保padding不影响总宽度 */
-    scrollbar-gutter: stable; /* 现代浏览器：为滚动条预留空间 */
+    box-shadow: var(--ios-shadow-lg);
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 320px;
+    box-sizing: border-box;
+    scrollbar-gutter: stable;
+    background: var(--system-background-secondary);
+    backdrop-filter: var(--ios-blur-light);
+    -webkit-backdrop-filter: var(--ios-blur-light);
+    border-right: 1px solid var(--card-border);
 }
 
 .history-panel.show {
@@ -647,26 +758,26 @@ body {
 }
 
 #historyList {
-    padding-right: 6px; /* 为滚动条预留空间，确保内容不被挤压 */
+    padding-right: 8px;
 }
 
-/* 历史记录项样式优化 */
+/* 历史记录项样式优化 - iOS 风格 */
 .history-item {
-    background: #1a1a1a;
-    border-radius: 6px; /* 减小圆角 */
-    border: 1px solid #333;
+    background: var(--system-background);
+    border-radius: var(--ios-radius-medium);
+    border: 1px solid var(--card-border);
     overflow: hidden;
-    transition: all 0.2s ease;
-    padding: 10px 14px;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    padding: 12px;
     position: relative;
-    margin-bottom: 8px; /* 减小底部间距 */
-    width: 100%; /* 确保宽度一致 */
+    margin-bottom: 12px;
+    width: 100%;
 }
 
 .history-item:hover {
-    transform: translateY(-2px);
-    border-color: #444;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-2px) scale(1.01);
+    border-color: var(--system-blue);
+    box-shadow: var(--ios-shadow-md);
 }
 
 /* 添加组悬停效果，使删除按钮在悬停时显示 */
@@ -680,50 +791,52 @@ body {
 }
 
 .history-info {
-    padding: 0; /* 移除额外的内边距 */
+    padding: 0;
     min-height: 70px;
 }
 
 .history-title {
-    font-weight: 500;
-    font-size: 0.95rem; /* 减小字体大小 */
-    margin-bottom: 2px; /* 减小底部边距 */
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--text-primary);
 }
 
 .history-meta {
-    color: #bbb;
-    font-size: 0.75rem; /* 减小字体大小 */
+    color: var(--text-secondary);
+    font-size: 0.75rem;
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 1px; /* 减小边距 */
+    margin-bottom: 2px;
 }
 
 .history-episode {
-    color: #3b82f6;
+    color: var(--system-blue);
 }
 
 .history-source {
-    color: #10b981;
+    color: var(--system-green);
 }
 
 .history-time {
-    color: #888;
-    font-size: 0.7rem; /* 减小字体大小 */
-    margin-top: 1px; /* 减小顶部边距 */
+    color: var(--text-tertiary);
+    font-size: 0.7rem;
+    margin-top: 2px;
 }
 
 .history-separator {
-    color: #666;
+    color: var(--system-gray);
 }
 
 .history-thumbnail {
     width: 100%;
     height: 90px;
-    background-color: #222;
+    background-color: var(--system-gray6);
     overflow: hidden;
+    border-radius: var(--ios-radius-small);
 }
 
 .history-thumbnail img {
@@ -732,62 +845,49 @@ body {
     object-fit: cover;
 }
 
-.history-info {
-    padding: 10px;
-}
-
-.history-time {
-    color: #888;
-    font-size: 0.8rem;
-    margin-top: 4px;
-}
-
-.history-title {
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* 添加播放进度条样式 */
+/* 添加播放进度条样式 - iOS 风格 */
 .history-progress {
-    margin: 5px 0;
+    margin: 6px 0;
 }
 
 .progress-bar {
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.1);
+    height: 4px;
+    background-color: var(--system-gray5);
     border-radius: 2px;
     overflow: hidden;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .progress-filled {
     height: 100%;
-    background: linear-gradient(to right, #00ccff, #3b82f6);
+    background: linear-gradient(to right, var(--system-blue), var(--system-green));
     border-radius: 2px;
+    transition: width 0.3s ease;
 }
 
 .progress-text {
-    font-size: 10px;
-    color: #888;
+    font-size: 11px;
+    color: var(--text-tertiary);
     text-align: right;
 }
 
-/* 添加恢复播放提示样式 */
+/* 添加恢复播放提示样式 - iOS 风格 */
 .position-restore-hint {
     position: absolute;
     bottom: 60px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background-color: rgba(0, 0, 0, 0.7);
+    background: var(--system-gray6);
+    backdrop-filter: var(--ios-blur-dark);
+    -webkit-backdrop-filter: var(--ios-blur-dark);
     color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 10px 16px;
+    border-radius: var(--ios-radius-medium);
     font-size: 14px;
     z-index: 100;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: var(--ios-shadow-lg);
 }
 
 .position-restore-hint.show {
@@ -852,12 +952,13 @@ body {
     }
 }
 
-/* 搜索结果卡片优化：横向布局 */
+/* 搜索结果卡片优化：横向布局 - iOS 风格 */
 .search-card-img-container {
-    width: 100px;  /* 增加宽度，从80px到100px */
-    height: 150px; /* 增加高度，从120px到150px */
+    width: 100px;
+    height: 150px;
     overflow: hidden;
-    background-color: #191919;
+    background-color: var(--system-gray5);
+    border-radius: var(--ios-radius-small);
 }
 
 /* 确保图片不会被拉伸，并且能够正确显示 */
@@ -867,21 +968,21 @@ body {
     object-fit: cover;
 }
 
-/* 针对搜索结果卡片修改网格布局以适应横向卡片 */
+/* 针对搜索结果卡片修改网格布局以适应横向卡片 - iOS 风格 */
 @media (max-width: 640px) {
     #results {
         grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
     }
 }
 
-/* 响应式调整：在小屏幕上依然保持较好的视觉效果 */
+/* 响应式调整：在小屏幕上依然保持较好的视觉效果 - iOS 风格 */
 @media (min-width: 641px) and (max-width: 768px) {
     #results {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 }
 
-/* 调整网格布局，减少每行卡片数量以适应更大尺寸的卡片 */
+/* 调整网格布局，减少每行卡片数量以适应更大尺寸的卡片 - iOS 风格 */
 @media (min-width: 769px) and (max-width: 1024px) {
     #results {
         grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -894,36 +995,39 @@ body {
     }
 }
 
-/* 优化卡片内元素间距 */
+/* 优化卡片内元素间距 - iOS 风格 */
 .card-hover .p-2 {
-    padding: 0.75rem; /* 增加内边距 */
+    padding: 0.75rem;
 }
 
-/* 增加卡片内字体大小 */
+/* 增加卡片内字体大小 - iOS 风格 */
 .card-hover h3 {
-    font-size: 0.95rem; /* 增加标题字体大小 */
-    line-height: 1.3rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .card-hover p {
-    font-size: 0.8rem; /* 增加描述字体大小 */
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
 
-/* 优化卡片内元素间距 */
-.card-hover .p-2 {
-    padding: 0.5rem;
-}
-
-/* 确保Toast显示在顶层并有适当的转换效果 */
+/* 确保Toast显示在顶层并有适当的转换效果 - iOS 风格 */
 #toast {
-    z-index: 9999; /* 确保显示在最上层 */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    box-shadow: var(--ios-shadow-lg);
     min-width: 200px;
     text-align: center;
-    pointer-events: none; /* 防止toast阻挡点击事件 */
+    pointer-events: none;
     transform: translateX(-50%) translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background: var(--system-gray6);
+    backdrop-filter: var(--ios-blur-dark);
+    -webkit-backdrop-filter: var(--ios-blur-dark);
+    color: white;
+    border-radius: var(--ios-radius-medium);
+    padding: 12px 20px;
 }
 
 #toast.hidden {
@@ -931,11 +1035,11 @@ body {
     transform: translateX(-50%) translateY(-100%);
 }
 
-/* 详情模态框样式优化 */
+/* 详情模态框样式优化 - iOS 风格 */
 #modal .modal-detail-info {
-    background: linear-gradient(135deg, #0a0a0a, #111);
-    border: 1px solid #222;
-    border-radius: 8px;
+    background: var(--system-background);
+    border: 1px solid var(--card-border);
+    border-radius: var(--ios-radius-medium);
     padding: 1rem;
     margin-bottom: 1.5rem;
 }
@@ -960,14 +1064,14 @@ body {
 }
 
 #modal .detail-label {
-    color: #9ca3af;
+    color: var(--text-secondary);
     font-weight: 500;
     min-width: 3rem;
     flex-shrink: 0;
 }
 
 #modal .detail-value {
-    color: white;
+    color: var(--text-primary);
     flex: 1;
     word-break: break-word;
 }
@@ -975,36 +1079,36 @@ body {
 #modal .detail-desc {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--card-border);
 }
 
 #modal .detail-desc-content {
-    color: #d1d5db;
+    color: var(--text-primary);
     font-size: 0.875rem;
     line-height: 1.6;
     max-height: 8rem;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #444 #222;
+    scrollbar-color: var(--system-gray3) var(--system-grouped-background);
 }
 
 #modal .detail-desc-content::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 #modal .detail-desc-content::-webkit-scrollbar-track {
-    background: #222;
+    background: var(--system-grouped-background);
     border-radius: 4px;
 }
 
 #modal .detail-desc-content::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background-color: var(--system-gray3);
     border-radius: 4px;
 }
 
-/* 集数统计信息样式 */
+/* 集数统计信息样式 - iOS 风格 */
 #modal .episode-stats {
-    color: #9ca3af;
+    color: var(--text-secondary);
     font-size: 0.875rem;
     display: flex;
     align-items: center;
@@ -1017,11 +1121,11 @@ body {
         gap: 0.5rem;
         font-size: 0.8rem;
     }
-    
+
     #modal .detail-label {
         min-width: 2.5rem;
     }
-    
+
     #modal .detail-desc-content {
         max-height: 6rem;
         font-size: 0.8rem;

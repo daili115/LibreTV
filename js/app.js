@@ -605,23 +605,7 @@ function getCustomApiInfo(customApiIndex) {
 
 // 搜索功能 - 修改为支持多选API和多页结果
 async function search() {
-    // 强化的密码保护校验 - 防止绕过
-    try {
-        if (window.ensurePasswordProtection) {
-            window.ensurePasswordProtection();
-        } else {
-            // 兼容性检查
-            if (window.isPasswordProtected && window.isPasswordVerified) {
-                if (window.isPasswordProtected() && !window.isPasswordVerified()) {
-                    showPasswordModal && showPasswordModal();
-                    return;
-                }
-            }
-        }
-    } catch (error) {
-        console.warn('Password protection check failed:', error.message);
-        return;
-    }
+    // 密码保护功能已禁用，移除密码检查
     const query = document.getElementById('searchInput').value.trim();
 
     if (!query) {
@@ -856,13 +840,7 @@ document.addEventListener('DOMContentLoaded', hookInput);
 
 // 显示详情 - 修改为支持自定义API
 async function showDetails(id, vod_name, sourceCode) {
-    // 密码保护校验
-    if (window.isPasswordProtected && window.isPasswordVerified) {
-        if (window.isPasswordProtected() && !window.isPasswordVerified()) {
-            showPasswordModal && showPasswordModal();
-            return;
-        }
-    }
+    // 密码保护功能已禁用，移除密码检查
     if (!id) {
         showToast('视频ID无效', 'error');
         return;
@@ -988,13 +966,7 @@ async function showDetails(id, vod_name, sourceCode) {
 
 // 更新播放视频函数，修改为使用/watch路径而不是直接打开player.html
 function playVideo(url, vod_name, sourceCode, episodeIndex = 0, vodId = '') {
-    // 密码保护校验
-    if (window.isPasswordProtected && window.isPasswordVerified) {
-        if (window.isPasswordProtected() && !window.isPasswordVerified()) {
-            showPasswordModal && showPasswordModal();
-            return;
-        }
-    }
+    // 密码保护功能已禁用，移除密码检查
 
     // 获取当前路径作为返回页面
     let currentPath = window.location.href;
