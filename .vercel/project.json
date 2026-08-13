@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_g3YuyntETYkAjfCY7qHCFxsGoRy3",
+  "orgId": "team_ThAoPj3dx8vNTcE7OSt3q7uB",
+  "projectName": "libre-tv",
+  "settings": {
+    "createdAt": 1786420959311,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": "",
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
