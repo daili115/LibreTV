@@ -90,6 +90,17 @@ let userClickedPosition = null; // 记录用户点击的位置
 let shortcutHintTimeout = null; // 用于控制快捷键提示显示时间
 let adFilteringEnabled = true; // 默认开启广告过滤
 let progressSaveInterval = null; // 定期保存进度的计时器
+
+// 将视频URL包装为代理URL，避免CORS（防止重复包装）
+function getProxyVideoUrl(url) {
+    if (!url || !url.startsWith('http')) return url;
+    if (url.startsWith(PROXY_URL)) return url;
+    try {
+        return PROXY_URL + encodeURIComponent(url);
+    } catch {
+        return url;
+    }
+}
 let currentVideoUrl = ''; // 记录当前实际的视频URL
 const isWebkit = (typeof window.webkitConvertPointFromNodeToPage === 'function')
 Artplayer.FULLSCREEN_WEB_IN_BODY = true;
@@ -119,6 +130,9 @@ function initializePageContent() {
     // 解析URL参数
     const urlParams = new URLSearchParams(window.location.search);
     let videoUrl = urlParams.get('url');
+    if (videoUrl && videoUrl.startsWith('http')) {
+        videoUrl = getProxyVideoUrl(videoUrl);
+    }
     const title = urlParams.get('title');
     const sourceCode = urlParams.get('source');
     let index = parseInt(urlParams.get('index') || '0');
@@ -440,7 +454,7 @@ function initPlayer(videoUrl) {
     // Create new ArtPlayer instance
     art = new Artplayer({
         container: '#player',
-        url: videoUrl,
+        url: getProxyVideoUrl(videoUrl),
         type: 'm3u8',
         title: videoTitle,
         volume: 0.8,
@@ -916,7 +930,7 @@ function playEpisode(index) {
     const sourceCode = urlParams2.get('source_code');
 
     // 准备切换剧集的URL
-    const url = currentEpisodes[index];
+    const url = getProxyVideoUrl(currentEpisodes[index]);
 
     // 更新当前剧集索引
     currentEpisodeIndex = index;
@@ -935,7 +949,7 @@ function playEpisode(index) {
     if (isWebkit) {
         initPlayer(url);
     } else {
-        art.switch = url;
+        art.switch = getProxyVideoUrl(url);
     }
 
     // 更新UI
@@ -1636,7 +1650,7 @@ async function switchToResource(sourceKey, vodId) {
         const targetUrl = data.episodes[targetIndex];
         
         // 构建播放页面URL
-        const watchUrl = `player.html?id=${vodId}&source=${sourceKey}&url=${encodeURIComponent(targetUrl)}&index=${targetIndex}&title=${encodeURIComponent(currentVideoTitle)}`;
+        const watchUrl = `player.html?id=${vodId}&source=${sourceKey}&url=${encodeURIComponent(getProxyVideoUrl(targetUrl))}&index=${targetIndex}&title=${encodeURIComponent(currentVideoTitle)}`;
         
         // 保存当前状态到localStorage
         try {
